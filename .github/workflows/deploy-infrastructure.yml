@@ -1,0 +1,23 @@
+name: Deploy CloudFormation Stack
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    validate-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up AWS CLI
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+                aws-region: us-east-1
+
+            # Required AWS IAM Permissions:
+            # - cloudformation:ValidateTemplate
+            - name: Validate CloudFormation template
+              run: aws cloudformation validate-template --template-body file://infrastructure/sqs-stack.yml
