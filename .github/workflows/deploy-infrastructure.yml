@@ -4,6 +4,10 @@ on:
         branches:
             - main
 
+permissions:
+    id-token: write
+    contents: read
+
 jobs:
     validate-and-deploy:
         runs-on: ubuntu-latest
