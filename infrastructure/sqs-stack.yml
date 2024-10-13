@@ -12,5 +12,5 @@ Resources:
 
 Outputs:
   QueueURL:
-    Description: "URL of the created SQS queue"
-    Value: !GetAtt MyStandardQueue.QueueUrl
+    Description: URL of the created SQS queue
+    Value: !GetAtt MyQueue.QueueUrl
