@@ -9,3 +9,8 @@ Resources:
       DelaySeconds: 0
       MaximumMessageSize: 262144
       ReceiveMessageWaitTimeSeconds: 0
+
+Outputs:
+  QueueURL:
+    Description: "URL of the created SQS queue"
+    Value: !GetAtt MyStandardQueue.QueueUrl

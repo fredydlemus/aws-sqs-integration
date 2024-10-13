@@ -1,8 +1,6 @@
 name: Deploy CloudFormation Stack
 on:
-    push:
-        branches:
-            - main
+    workflow_dispatch:
 
 permissions:
     id-token: write
@@ -25,3 +23,8 @@ jobs:
             # - cloudformation:ValidateTemplate
             - name: Validate CloudFormation template
               run: aws cloudformation validate-template --template-body file://infrastructure/sqs-stack.yml
+            # Required AWS IAM Permissions:
+            # - cloudformation:CreateStack
+            # - cloudformation:UpdateStack
+            - name: Deploy CloudFormation stack
+              run: aws cloudformation deploy --stack-name sqs-stack --template-file infrastructure/sqs-stack.yml
